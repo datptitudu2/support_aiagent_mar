@@ -194,6 +194,7 @@ function renderCollect() {
         <td>
           <div class="item-title">${esc(p.title)}</div>
           <div class="item-meta" style="margin-top:4px; color:var(--text-secondary);">${esc(p.content)}</div>
+          ${p.sourceUrl ? `<div class="item-meta" style="margin-top:4px;"><a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--text); text-decoration:underline;">Xem nguồn gốc thực tế</a></div>` : ''}
           ${(p.topComments || [])
             .map((c) => `<div class="comment-quote">"${esc(c)}"</div>`)
             .join('')}
@@ -674,10 +675,20 @@ document.getElementById('formUrlCollect').addEventListener('submit', async (e) =
   }
 });
 
-document.getElementById('btnSyncDemo').addEventListener('click', async () => {
-  await api('/api/collect/sync-demo', { method: 'POST' });
-  await loadState();
-  showToast('Agent vừa thu thập thêm 1 bài đăng mới từ thị trường.');
+document.getElementById('btnSyncLive').addEventListener('click', async (e) => {
+  const btn = e.target;
+  btn.disabled = true;
+  btn.textContent = 'Đang quét Internet...';
+  try {
+    const res = await api('/api/collect/live', { method: 'POST' });
+    await loadState();
+    showToast(`Đã quét dữ liệu thật: thêm mới ${res.addedCount} bài viết (tổng ${res.totalPosts} bài).`);
+  } catch (err) {
+    showToast(err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Quét dữ liệu thật từ Internet';
+  }
 });
 
 document.getElementById('btnRunAnalysis').addEventListener('click', async (e) => {

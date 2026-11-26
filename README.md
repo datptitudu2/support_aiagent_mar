@@ -30,8 +30,8 @@ Hiển thị nhanh số đối thủ đang theo dõi, số bài đã thu thập,
 
 ![Tổng quan quy trình](docs/screenshots/01-tong-quan.png)
 
-### Bước 1: Thu thập dữ liệu đối thủ
-Quản lý danh sách đối thủ (mặc định có sẵn 3 đối thủ mẫu ngành Skincare). Hỗ trợ nhập trực tiếp bài đăng và bình luận khách hàng, quét nội dung từ URL công khai, hoặc bấm nút giả lập quét bài mới.
+### Bước 1: Thu thập dữ liệu đối thủ (Dữ liệu thật)
+Quản lý danh sách đối thủ thực tế (mặc định có sẵn 3 thương hiệu mỹ phẩm: Cocoon Vietnam, La Roche-Posay, Hasaki; có thể đổi sang bất kỳ đối thủ nào). Bấm Quét dữ liệu thật từ Internet để Agent tự động lấy tin tức, bài báo và khuyến mãi mới nhất từ Google News Việt Nam kèm đường dẫn nguồn gốc để kiểm chứng, hoặc dán URL công khai / bài đăng mạng xã hội trực tiếp.
 
 ![Thu thập dữ liệu đối thủ](docs/screenshots/02-thu-thap-doi-thu.png)
 

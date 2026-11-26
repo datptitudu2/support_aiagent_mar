@@ -71,139 +71,35 @@ function createSeedData() {
     competitors: [
       {
         id: 'c1',
-        name: 'Mộc Thảo Skincare',
-        channel: 'Facebook Fanpage',
-        url: 'https://facebook.com/mocthaoskincare',
-        segment: 'Đối thủ trực tiếp',
+        name: 'Cocoon Vietnam',
+        channel: 'Website & Báo chí / Social',
+        url: 'https://cocoonvietnam.com',
+        segment: 'Đối thủ trực tiếp (Local Brand thuần chay)',
       },
       {
         id: 'c2',
-        name: 'LumiDerma VN',
-        channel: 'Facebook & TikTok',
-        url: 'https://facebook.com/lumidermavn',
-        segment: 'Đối thủ trực tiếp',
+        name: 'La Roche-Posay',
+        channel: 'Website & Báo chí / Social',
+        url: 'https://www.laroche-posay.vn',
+        segment: 'Thương hiệu dẫn đầu phân khúc da nhạy cảm',
       },
       {
         id: 'c3',
-        name: 'Sora Botanicals',
-        channel: 'Facebook Fanpage',
-        url: 'https://facebook.com/sorabotanicals',
-        segment: 'Thương hiệu dẫn đầu phân khúc',
+        name: 'Hasaki',
+        channel: 'Website & Báo chí / Social',
+        url: 'https://hasaki.vn',
+        segment: 'Hệ thống bán lẻ mỹ phẩm (mạnh khuyến mãi)',
       },
     ],
-    collectedPosts: [
-      {
-        id: 'cp1',
-        competitorId: 'c1',
-        competitorName: 'Mộc Thảo Skincare',
-        channel: 'Facebook',
-        collectedAt: daysAgo(1),
-        pillar: 'Bán hàng / Khuyến mãi',
-        title: 'Flash Sale đầu hè: Mua 1 tặng 1 Kem chống nắng thảo mộc',
-        content:
-          'Nắng nóng chạm đỉnh rồi nàng ơi! Mộc Thảo tung ưu đãi Mua 1 Tặng 1 dòng Kem chống nắng thảo mộc SPF50 chỉ trong 48 giờ cuối tuần. Giảm thêm 10% cho đơn từ 399k. Nhắn tin ngay để giữ suất!',
-        likes: 420,
-        commentsCount: 86,
-        shares: 34,
-        isPromoAlert: true,
-        promoDetail: 'Mua 1 tặng 1 Kem chống nắng + giảm thêm 10% (48h)',
-        topComments: [
-          'Da dầu dùng có bị bí hay xuống tông cuối ngày không shop?',
-          'Mình mua đợt trước thấy hơi dày mặt một chút nhưng mùi dễ chịu.',
-          'Giao về Hà Nội mất mấy ngày vậy shop?',
-        ],
-        sourceUrl: 'https://facebook.com/mocthaoskincare/posts/101',
-      },
-      {
-        id: 'cp2',
-        competitorId: 'c2',
-        competitorName: 'LumiDerma VN',
-        channel: 'TikTok',
-        collectedAt: daysAgo(2),
-        pillar: 'Giáo dục kiến thức',
-        title: '3 sai lầm khi thoa Serum B5 khiến da mãi không phục hồi',
-        content:
-          'Nhiều bạn dùng B5 cả tháng vẫn thấy da khô căng, rát nhẹ? Lý do nằm ở việc thoa trên nền da quá khô và không khóa ẩm ngay sau đó. Cùng LumiDerma kiểm tra lại chu trình 3 bước chuẩn cho da nhạy cảm.',
-        likes: 1280,
-        commentsCount: 142,
-        shares: 215,
-        isPromoAlert: false,
-        promoDetail: '',
-        topComments: [
-          'Thảo nào mình bôi xong thấy dính dính mà da vẫn mốc.',
-          'B5 bên mình có dùng chung với Retinol được không ạ?',
-          'Giá lọ 30ml bao nhiêu vậy shop, thấy hơi cao so với sinh viên.',
-        ],
-        sourceUrl: 'https://tiktok.com/@lumidermavn/video/202',
-      },
-      {
-        id: 'cp3',
-        competitorId: 'c3',
-        competitorName: 'Sora Botanicals',
-        channel: 'Facebook',
-        collectedAt: daysAgo(3),
-        pillar: 'Đánh giá / Review',
-        title: 'Feedback 14 ngày phục hồi da kích ứng từ khách hàng văn phòng',
-        content:
-          'Ngồi điều hòa 8 tiếng mỗi ngày khiến da dễ mất nước và mẩn đỏ hai bên má. Chị Minh Anh (26 tuổi) chia sẻ cảm nhận sau 2 tuần tối giản chu trình chỉ còn Sữa rửa mặt dịu nhẹ và Serum phục hồi.',
-        likes: 690,
-        commentsCount: 64,
-        shares: 48,
-        isPromoAlert: false,
-        promoDetail: '',
-        topComments: [
-          'Da mình cũng ngồi máy lạnh suốt, hay bị đỏ hai má giống chị này.',
-          'Có bản mini dùng thử không shop? Sợ mua chai to không hợp.',
-        ],
-        sourceUrl: 'https://facebook.com/sorabotanicals/posts/303',
-      },
-      {
-        id: 'cp4',
-        competitorId: 'c1',
-        competitorName: 'Mộc Thảo Skincare',
-        channel: 'Facebook',
-        collectedAt: daysAgo(4),
-        pillar: 'Bắt trend / Tương tác',
-        title: 'Kiểm tra loại da của bạn qua 1 câu hỏi nhanh buổi sáng',
-        content:
-          'Sáng ngủ dậy vùng chữ T đổ dầu nhưng hai má lại căng khô? Comment ngay tình trạng da hiện tại của bạn bên dưới để chuyên viên gợi ý chu trình tối giản dưới 500k nhé.',
-        likes: 310,
-        commentsCount: 95,
-        shares: 19,
-        isPromoAlert: false,
-        promoDetail: '',
-        topComments: [
-          'Mình bị đổ dầu vùng mũi, hay có mụn ẩn ở cằm.',
-          'Mình da nhạy cảm dễ đỏ khi ra nắng.',
-        ],
-        sourceUrl: 'https://facebook.com/mocthaoskincare/posts/104',
-      },
-    ],
+    collectedPosts: [],
     analysis: null,
-    drafts: [
-      {
-        id: 'd1',
-        title: 'Vì sao da dầu thường ngại thoa kem chống nắng vào mùa nóng?',
-        channel: 'Facebook Fanpage',
-        pillar: 'Giáo dục kiến thức',
-        angleSource: 'Khoảng trống từ bình luận khách hàng của Mộc Thảo Skincare',
-        content:
-          'Nhiều bạn da dầu chia sẻ với AuraSkin rằng ngại thoa lại kem chống nắng giữa trưa vì sợ cảm giác dày mặt, bí da và xuống tông cuối ngày.\n\nThực tế, cảm giác nặng mặt thường đến từ kết cấu kem quá đặc hoặc lớp dưỡng bên dưới chưa kịp thấm. Với thời tiết nóng ẩm, bạn chỉ cần ưu tiên kem chống nắng thấm nhanh dưới 1 phút, không nâng tông giả và không chứa dầu khoáng gây bít tắc.\n\nKem chống nắng thoáng nhẹ AuraSkin SPF50+ PA++++ (285.000đ / 50ml) được thiết kế riêng cho da dầu mụn: ráo mịn sau 45 giây, giữ bề mặt da tự nhiên suốt ngày làm việc.\n\nBạn đang gặp tình trạng bí da hay đổ dầu khi dùng kem chống nắng? Nhắn tin cho AuraSkin để được tư vấn đúng loại da nhé.\n\n#AuraSkin #ChamSocDaDau #KemChongNangThoangNhe #SkincareThienNhien',
-        visualBrief:
-          'Ảnh chụp cận cảnh kết cấu kem chống nắng thấm trong suốt trên mu bàn tay, ánh sáng tự nhiên, nền trắng sạch. Chèn 1 dòng chữ ngắn gọn: "Ráo nhẹ sau 45 giây – Không bết rít, không nâng tông giả".',
-        status: 'pending', // 'draft' | 'pending' | 'scheduled' | 'published'
-        scheduledFor: new Date(now.getTime() + 86400000).toISOString().slice(0, 16),
-        publishedAt: null,
-        publishLog: '',
-        createdAt: daysAgo(0),
-      },
-    ],
+    drafts: [],
     activityLogs: [
       {
         id: 'log1',
         timestamp: daysAgo(0),
         stage: 'Khởi tạo hệ thống',
-        message: 'Đã nạp hồ sơ thương hiệu AuraSkin và 4 bài đăng mẫu từ 3 đối thủ.',
+        message: 'Đã nạp hồ sơ thương hiệu AuraSkin và 3 đối thủ thực tế (Cocoon Vietnam, La Roche-Posay, Hasaki). Nhấn "Quét dữ liệu thật" để thu thập từ Internet.',
       },
     ],
   };
@@ -565,6 +461,87 @@ async function draftWithAgent(db, payload) {
   return generateLocalDraft(db, payload);
 }
 
+function decodeHtmlEntities(str) {
+  return String(str || '')
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function classifyPillar(text) {
+  const t = (text || '').toLowerCase();
+  if (/giảm giá|khuyến mãi|sale|ưu đãi|voucher|tặng|deal|mua 1 tặng 1|flash sale|combo/.test(t)) {
+    return 'Bán hàng / Khuyến mãi';
+  }
+  if (/review|đánh giá|trải nghiệm|cảm nhận|feedback|so sánh/.test(t)) {
+    return 'Đánh giá / Review';
+  }
+  if (/xu hướng|trend|ra mắt|chiến dịch|sự kiện|hợp tác|đại sứ/.test(t)) {
+    return 'Bắt trend / Tương tác';
+  }
+  return 'Giáo dục kiến thức';
+}
+
+async function fetchGoogleNewsForCompetitor(competitorName, maxItems = 3) {
+  const query = `${competitorName}`;
+  const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=vi&gl=VN&ceid=VN:vi`;
+  const res = await fetch(rssUrl, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) MarketingResearchBot/1.0' },
+  });
+  if (!res.ok) {
+    throw new Error(`Không thể truy cập Google News RSS (${res.status})`);
+  }
+  const xml = await res.text();
+  const items = [];
+  const itemRegex = /<item>([\s\S]*?)<\/item>/gi;
+  let match;
+  while ((match = itemRegex.exec(xml)) !== null && items.length < maxItems) {
+    const block = match[1];
+    const titleMatch = block.match(/<title>([\s\S]*?)<\/title>/i);
+    const linkMatch = block.match(/<link>([\s\S]*?)<\/link>/i);
+    const pubDateMatch = block.match(/<pubDate>([\s\S]*?)<\/pubDate>/i);
+    const sourceMatch = block.match(/<source[^>]*>([\s\S]*?)<\/source>/i);
+    const descMatch = block.match(/<description>([\s\S]*?)<\/description>/i);
+
+    const rawTitle = decodeHtmlEntities(titleMatch ? titleMatch[1] : '');
+    const link = (linkMatch ? linkMatch[1] : '').trim();
+    const sourceName = decodeHtmlEntities(sourceMatch ? sourceMatch[1] : 'Google News VN');
+    const desc = decodeHtmlEntities(descMatch ? descMatch[1] : '');
+    const pubIso = pubDateMatch && !isNaN(Date.parse(pubDateMatch[1]))
+      ? new Date(pubDateMatch[1]).toISOString()
+      : new Date().toISOString();
+
+    if (!rawTitle) continue;
+    const combined = `${rawTitle} ${desc}`;
+    const isPromo = /giảm giá|khuyến mãi|sale|ưu đãi|voucher|tặng|deal|flash sale/i.test(combined);
+    items.push({
+      id: 'cp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+      competitorId: '',
+      competitorName,
+      channel: `Báo chí / Web (${sourceName})`,
+      collectedAt: pubIso,
+      pillar: classifyPillar(combined),
+      title: rawTitle,
+      content: desc && desc !== rawTitle ? desc : `Tin tức thực tế thu thập từ ${sourceName} liên quan đến ${competitorName}.`,
+      likes: 0,
+      commentsCount: 0,
+      shares: 0,
+      isPromoAlert: isPromo,
+      promoDetail: isPromo ? `Phát hiện thông tin ưu đãi/khuyến mãi trên ${sourceName}` : '',
+      topComments: [],
+      sourceUrl: link,
+    });
+  }
+  return items;
+}
+
 async function fetchPublicUrl(targetUrl) {
   const res = await fetch(targetUrl, {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) MarketingResearchBot/1.0' },
@@ -755,56 +732,44 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 201, post);
     }
 
-    if (pathname === '/api/collect/sync-demo' && req.method === 'POST') {
+    if (pathname === '/api/collect/live' && req.method === 'POST') {
       const db = loadDb();
-      const samplePool = [
-        {
-          competitorName: 'LumiDerma VN',
-          channel: 'Facebook',
-          pillar: 'Bán hàng / Khuyến mãi',
-          title: 'Combo da sạch dịu nhẹ giảm 25% dịp giữa tháng',
-          content:
-            'Giảm ngay 25% combo Sữa rửa mặt + Nước cân bằng cho 200 đơn đầu tiên trong tuần này. Miễn phí vận chuyển toàn quốc.',
-          likes: 540,
-          commentsCount: 73,
-          shares: 41,
-          isPromoAlert: true,
-          promoDetail: 'Giảm 25% combo làm sạch + Freeship',
-          topComments: [
-            'Sữa rửa mặt có bị khô căng da sau khi rửa không shop?',
-            'Mình da nhạy cảm có dùng được bộ này không?',
-          ],
-        },
-        {
-          competitorName: 'Sora Botanicals',
-          channel: 'TikTok',
-          pillar: 'Giáo dục kiến thức',
-          title: 'Cách đọc bảng thành phần để tránh kem chống nắng gây cay mắt',
-          content:
-            'Nếu bạn hay bị cay mắt vào cuối chiều khi thoa kem chống nắng, hãy kiểm tra màng lọc chống nắng và hạn chế thoa quá sát viền mi dưới.',
-          likes: 1520,
-          commentsCount: 188,
-          shares: 310,
-          isPromoAlert: false,
-          promoDetail: '',
-          topComments: [
-            'Đúng thứ mình cần, dùng mấy loại toàn bị cay mắt buổi trưa.',
-            'Hãng gợi ý giúp mình loại nào thấm nhanh không bị bóng dầu với ạ.',
-          ],
-        },
-      ];
-      const pick = samplePool[db.collectedPosts.length % samplePool.length];
-      const newPost = {
-        id: 'cp_' + Date.now(),
-        competitorId: '',
-        collectedAt: new Date().toISOString(),
-        sourceUrl: 'https://example.com/demo-feed',
-        ...pick,
-      };
-      db.collectedPosts.unshift(newPost);
-      addLog(db, 'Agent thu thập tự động', `Đã thu thập thêm 1 bài mới từ ${newPost.competitorName}.`);
+      if (!db.competitors.length) {
+        return sendJson(res, 400, { error: 'Vui lòng thêm ít nhất 1 đối thủ trước khi quét dữ liệu thật.' });
+      }
+      const existingTitles = new Set(db.collectedPosts.map((p) => (p.title || '').toLowerCase().trim()));
+      const newlyAdded = [];
+      const errors = [];
+
+      for (const comp of db.competitors) {
+        try {
+          const items = await fetchGoogleNewsForCompetitor(comp.name, 3);
+          for (const item of items) {
+            item.competitorId = comp.id;
+            const key = item.title.toLowerCase().trim();
+            if (!existingTitles.has(key)) {
+              existingTitles.add(key);
+              db.collectedPosts.unshift(item);
+              newlyAdded.push(item);
+            }
+          }
+        } catch (err) {
+          errors.push(`${comp.name}: ${err.message}`);
+        }
+      }
+
+      addLog(
+        db,
+        'Thu thập dữ liệu thật',
+        `Đã quét Google News VN cho ${db.competitors.length} đối thủ, thêm mới ${newlyAdded.length} bài viết thực tế.`
+      );
       saveDb(db);
-      return sendJson(res, 201, newPost);
+      return sendJson(res, 200, {
+        addedCount: newlyAdded.length,
+        totalPosts: db.collectedPosts.length,
+        newlyAdded,
+        errors,
+      });
     }
 
     if (pathname === '/api/analyze' && req.method === 'POST') {
@@ -961,9 +926,28 @@ const server = http.createServer(async (req, res) => {
       const db = loadDb();
       const steps = [];
 
-      // Step 1: Collect
-      const analysisBefore = db.collectedPosts.length;
-      steps.push(`Bước 1/3 – Thu thập: Đang sử dụng ${analysisBefore} bài dữ liệu từ ${db.competitors.length} đối thủ.`);
+      // Step 1: Collect live real data from Google News VN for all competitors
+      const existingTitles = new Set(db.collectedPosts.map((p) => (p.title || '').toLowerCase().trim()));
+      let liveAdded = 0;
+      for (const comp of db.competitors) {
+        try {
+          const items = await fetchGoogleNewsForCompetitor(comp.name, 2);
+          for (const item of items) {
+            item.competitorId = comp.id;
+            const key = item.title.toLowerCase().trim();
+            if (!existingTitles.has(key)) {
+              existingTitles.add(key);
+              db.collectedPosts.unshift(item);
+              liveAdded++;
+            }
+          }
+        } catch {
+          // continue with existing posts if a source fails
+        }
+      }
+      steps.push(
+        `Bước 1/3 – Thu thập dữ liệu thật: Đã quét Google News VN cho ${db.competitors.length} đối thủ (thêm mới ${liveAdded} bài, tổng ${db.collectedPosts.length} bài trong kho).`
+      );
 
       // Step 2: Analyze
       const analysis = await analyzeWithAgent(db);
