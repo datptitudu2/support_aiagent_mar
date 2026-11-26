@@ -1,0 +1,12 @@
+{
+  "name": "marketing-ai-agent-local",
+  "version": "1.0.0",
+  "description": "Local AI Agent web app for competitor listening, marketing analysis, content drafting, and approval-based publishing.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

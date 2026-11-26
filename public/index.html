@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trợ lý AI Agent Marketing – Hệ thống nội bộ</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-title" id="sidebarBrandName">AuraSkin</div>
+        <div class="brand-subtitle">AI Agent Marketing Ops</div>
+      </div>
+
+      <nav class="nav-list" aria-label="Điều hướng chính">
+        <button class="nav-item active" data-view="overview">Tổng quan quy trình</button>
+        <div class="nav-group-label">Quy trình 4 bước</div>
+        <button class="nav-item" data-view="collect">1. Thu thập đối thủ</button>
+        <button class="nav-item" data-view="analyze">2. Phân tích Marketing</button>
+        <button class="nav-item" data-view="studio">3. Xưởng bài &amp; Duyệt đăng</button>
+        <div class="nav-group-label">Thiết lập</div>
+        <button class="nav-item" data-view="brand">Hồ sơ thương hiệu &amp; Cấu hình</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="meta-row">
+          <span class="meta-label">AI Engine</span>
+          <span class="meta-value" id="sidebarAiMode">Local</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Chế độ đăng</span>
+          <span class="meta-value" id="sidebarPublishMode">Giả lập Local</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <h1 class="page-title" id="pageTitle">Tổng quan quy trình</h1>
+          <p class="page-desc" id="pageDesc">Theo dõi trạng thái thu thập đối thủ, phân tích thị trường và lịch xuất bản nội dung.</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-primary" id="btnRunPipeline">Chạy toàn trình Agent</button>
+        </div>
+      </header>
+
+      <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+      <!-- VIEW: OVERVIEW -->
+      <section class="view active" id="view-overview">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Đối thủ đang theo dõi</div>
+            <div class="kpi-value" id="kpiCompetitors">0</div>
+            <div class="kpi-sub">Kênh Facebook, TikTok, Web</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Bài đối thủ đã thu thập</div>
+            <div class="kpi-value" id="kpiPosts">0</div>
+            <div class="kpi-sub">Dữ liệu đầu vào phân tích</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Bài nháp chờ duyệt</div>
+            <div class="kpi-value" id="kpiPending">0</div>
+            <div class="kpi-sub">Cơ chế Người duyệt – Máy đăng</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Đã lên lịch / Đã đăng</div>
+            <div class="kpi-value" id="kpiPublished">0</div>
+            <div class="kpi-sub">Xuất bản đúng quy chuẩn</div>
+          </div>
+        </div>
+
+        <div id="pipelineOutput" class="panel hidden">
+          <div class="panel-header">
+            <h2 class="panel-title">Kết quả chạy toàn trình Agent vừa thực hiện</h2>
+          </div>
+          <div class="panel-body">
+            <ol id="pipelineStepsList" class="clean-list"></ol>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Cảnh báo khuyến mãi từ đối thủ</h2>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn btn-sm btn-secondary" id="btnSendTgAlert">Gửi cảnh báo Telegram</button>
+                <button class="btn btn-link" data-jump="collect">Xem tất cả</button>
+              </div>
+            </div>
+            <div class="panel-body" id="overviewAlerts"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Nhật ký hoạt động của Agent</h2>
+            </div>
+            <div class="panel-body" id="overviewLogs"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: COLLECT -->
+      <section class="view" id="view-collect">
+        <div class="two-col-asymmetric">
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Danh sách đối thủ theo dõi</h2>
+            </div>
+            <div class="panel-body">
+              <div id="competitorList" class="stack-list"></div>
+              <form id="formAddCompetitor" class="inline-form">
+                <div class="form-row">
+                  <input type="text" id="compName" placeholder="Tên đối thủ (VD: Cocoon, DearKlairs...)" required />
+                  <input type="text" id="compChannel" placeholder="Kênh (Facebook / TikTok)" value="Facebook Fanpage" />
+                </div>
+                <div class="form-row">
+                  <input type="url" id="compUrl" placeholder="Đường dẫn trang (tùy chọn)" />
+                  <button type="submit" class="btn btn-secondary">Thêm đối thủ</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Thu thập dữ liệu mới</h2>
+              <button class="btn btn-secondary" id="btnSyncDemo">Giả lập Agent quét 1 bài mới</button>
+            </div>
+            <div class="panel-body">
+              <div class="sub-tabs">
+                <button class="sub-tab active" data-collect-tab="manual">Nhập bài đối thủ trực tiếp</button>
+                <button class="sub-tab" data-collect-tab="url">Quét từ đường dẫn URL công khai</button>
+              </div>
+
+              <form id="formManualPost" class="stack-form">
+                <div class="form-row">
+                  <div class="field">
+                    <label for="postCompName">Đối thủ</label>
+                    <input type="text" id="postCompName" placeholder="VD: Mộc Thảo Skincare" required />
+                  </div>
+                  <div class="field">
+                    <label for="postChannel">Kênh</label>
+                    <select id="postChannel">
+                      <option value="Facebook">Facebook</option>
+                      <option value="TikTok">TikTok</option>
+                      <option value="Instagram">Instagram</option>
+                      <option value="Website">Website</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="postPillar">Nhóm nội dung</label>
+                    <select id="postPillar">
+                      <option value="Giáo dục kiến thức">Giáo dục kiến thức</option>
+                      <option value="Bán hàng / Khuyến mãi">Bán hàng / Khuyến mãi</option>
+                      <option value="Đánh giá / Review">Đánh giá / Review</option>
+                      <option value="Bắt trend / Tương tác">Bắt trend / Tương tác</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="postTitle">Tiêu đề / Câu mở đầu (Hook)</label>
+                  <input type="text" id="postTitle" placeholder="Nhập tiêu đề hoặc câu đầu bài viết của đối thủ" required />
+                </div>
+                <div class="field">
+                  <label for="postContent">Nội dung bài viết</label>
+                  <textarea id="postContent" rows="3" placeholder="Dán nội dung bài đăng đối thủ vào đây..." required></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="postLikes">Lượt thích</label>
+                    <input type="number" id="postLikes" value="250" min="0" />
+                  </div>
+                  <div class="field">
+                    <label for="postCommentsCount">Bình luận</label>
+                    <input type="number" id="postCommentsCount" value="40" min="0" />
+                  </div>
+                  <div class="field">
+                    <label for="postShares">Chia sẻ</label>
+                    <input type="number" id="postShares" value="15" min="0" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="postTopComments">Bình luận nổi bật của khách hàng (mỗi dòng 1 bình luận)</label>
+                  <textarea id="postTopComments" rows="2" placeholder="VD: Da dầu dùng có bị bí không shop?"></textarea>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Lưu vào kho dữ liệu</button>
+                </div>
+              </form>
+
+              <form id="formUrlCollect" class="stack-form hidden">
+                <p class="helper-text">
+                  Nhập đường dẫn bài viết blog, trang sản phẩm hoặc trang tin công khai của đối thủ. Hệ thống sẽ tự tải nội dung công khai về kho dữ liệu.
+                </p>
+                <div class="field">
+                  <label for="scrapeCompName">Tên đối thủ</label>
+                  <input type="text" id="scrapeCompName" placeholder="VD: Thương hiệu đối thủ" />
+                </div>
+                <div class="field">
+                  <label for="scrapeUrl">Đường dẫn URL công khai</label>
+                  <input type="url" id="scrapeUrl" placeholder="https://..." required />
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Quét nội dung trang</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Kho dữ liệu bài đăng đối thủ đã thu thập</h2>
+            <span class="count-badge" id="collectedCountBadge">0 bài</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 15%">Đối thủ / Kênh</th>
+                  <th style="width: 15%">Trụ cột nội dung</th>
+                  <th style="width: 34%">Nội dung &amp; Bình luận khách hàng</th>
+                  <th style="width: 18%">Tương tác</th>
+                  <th style="width: 10%">Cảnh báo</th>
+                  <th style="width: 8%">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="collectedPostsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: ANALYZE -->
+      <section class="view" id="view-analyze">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Báo cáo phân tích thị trường &amp; đối thủ</h2>
+              <p class="panel-sub" id="analysisMeta">Chưa có báo cáo phân tích. Nhấn nút bên phải để AI Agent tổng hợp dữ liệu.</p>
+            </div>
+            <button class="btn btn-primary" id="btnRunAnalysis">Chạy AI Phân tích ngay</button>
+          </div>
+          <div class="panel-body" id="analysisContainer">
+            <div class="empty-state">
+              Nhấn <strong>Chạy AI Phân tích ngay</strong> để hệ thống đọc toàn bộ bài đối thủ, thống kê Content Pillar, tìm khoảng trống nội dung và đề xuất ý tưởng bài viết mới.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: STUDIO -->
+      <section class="view" id="view-studio">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Tạo bài viết mới từ yêu cầu hoặc ý tưởng</h2>
+          </div>
+          <div class="panel-body">
+            <form id="formGenerateDraft" class="inline-grid-form">
+              <div class="field span-2">
+                <label for="genTitle">Chủ đề / Góc tiếp cận bài viết</label>
+                <input type="text" id="genTitle" placeholder="VD: Cách chọn kem chống nắng không gây bí da cho dân văn phòng" required />
+              </div>
+              <div class="field">
+                <label for="genChannel">Kênh xuất bản</label>
+                <select id="genChannel">
+                  <option value="Facebook Fanpage">Facebook Fanpage</option>
+                  <option value="TikTok (Kịch bản ngắn)">TikTok (Kịch bản ngắn)</option>
+                  <option value="Website / Blog">Website / Blog</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="genPillar">Trụ cột nội dung</label>
+                <select id="genPillar">
+                  <option value="Giáo dục kiến thức">Giáo dục kiến thức</option>
+                  <option value="Bán hàng / Khuyến mãi">Bán hàng / Khuyến mãi</option>
+                  <option value="Đánh giá / Review">Đánh giá / Review</option>
+                  <option value="Bắt trend / Tương tác">Bắt trend / Tương tác</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="genProduct">Sản phẩm lồng ghép</label>
+                <select id="genProduct"></select>
+              </div>
+              <div class="field align-end">
+                <button type="submit" class="btn btn-primary">AI Soạn bài nháp</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="studio-layout">
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Hàng đợi bài viết &amp; Lịch đăng</h2>
+              <span class="count-badge" id="draftsCountBadge">0 bài</span>
+            </div>
+            <div class="panel-body queue-list" id="draftQueueList"></div>
+          </div>
+
+          <div class="panel" id="editorPanel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Biên tập, kiểm duyệt &amp; xem trước bài đăng</h2>
+                <p class="panel-sub" id="editorStatusLine">Chọn một bài viết ở cột bên trái để chỉnh sửa và duyệt đăng.</p>
+              </div>
+              <button class="btn btn-danger-outline hidden" id="btnDeleteDraft">Xóa bài</button>
+            </div>
+            <div class="panel-body" id="editorWorkspace">
+              <div class="empty-state">Chưa chọn bài viết nào.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: BRAND & SETTINGS -->
+      <section class="view" id="view-brand">
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Hồ sơ thương hiệu (Brand Knowledge Base)</h2>
+            </div>
+            <div class="panel-body">
+              <form id="formBrand" class="stack-form">
+                <div class="field">
+                  <label for="brandName">Tên thương hiệu</label>
+                  <input type="text" id="brandName" required />
+                </div>
+                <div class="field">
+                  <label for="brandIndustry">Ngành hàng / Chủ đề</label>
+                  <input type="text" id="brandIndustry" required />
+                </div>
+                <div class="field">
+                  <label for="brandAudience">Khách hàng mục tiêu</label>
+                  <textarea id="brandAudience" rows="2"></textarea>
+                </div>
+                <div class="field">
+                  <label for="brandVoice">Giọng văn thương hiệu (Brand Voice)</label>
+                  <textarea id="brandVoice" rows="2"></textarea>
+                </div>
+                <div class="field">
+                  <label for="brandBanned">Danh sách từ khóa cấm (mỗi dòng 1 cụm từ – dùng để kiểm duyệt tự động)</label>
+                  <textarea id="brandBanned" rows="4"></textarea>
+                </div>
+                <div class="field">
+                  <label for="brandProductsJson">Danh mục sản phẩm (Mỗi dòng theo dạng: Tên sản phẩm | Giá | USP)</label>
+                  <textarea id="brandProductsText" rows="5"></textarea>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Lưu hồ sơ thương hiệu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Cấu hình AI Engine &amp; Kênh xuất bản</h2>
+            </div>
+            <div class="panel-body">
+              <form id="formSettings" class="stack-form">
+                <div class="field">
+                  <label for="aiProvider">Bộ máy phân tích &amp; viết bài</label>
+                  <select id="aiProvider">
+                    <option value="local">Local Marketing Engine (Chạy offline, không cần API Key)</option>
+                    <option value="gemini">Google Gemini API (Cần API Key)</option>
+                    <option value="openai">OpenAI API (Cần API Key)</option>
+                  </select>
+                </div>
+                <div class="field" id="geminiFields">
+                  <label for="geminiApiKey">Gemini API Key</label>
+                  <input type="password" id="geminiApiKey" placeholder="AIza..." />
+                  <label for="geminiModel" style="margin-top: 8px;">Model Gemini</label>
+                  <input type="text" id="geminiModel" value="gemini-2.5-flash" />
+                </div>
+                <div class="field" id="openaiFields">
+                  <label for="openaiApiKey">OpenAI API Key</label>
+                  <input type="password" id="openaiApiKey" placeholder="sk-..." />
+                  <label for="openaiModel" style="margin-top: 8px;">Model OpenAI</label>
+                  <input type="text" id="openaiModel" value="gpt-4o-mini" />
+                </div>
+
+                <hr class="divider" />
+
+                <div class="field">
+                  <label for="publishMode">Chế độ đăng bài sau khi duyệt</label>
+                  <select id="publishMode">
+                    <option value="mock">Giả lập Local (An toàn cho demo bài tập lớn)</option>
+                    <option value="telegram">Telegram Bot (Gửi thật sang Group / Channel Telegram)</option>
+                    <option value="facebook">Đăng thật lên Facebook Page (Graph API)</option>
+                  </select>
+                </div>
+                <div class="field" id="telegramFields">
+                  <label for="telegramBotToken">Telegram Bot Token (Lấy từ @BotFather)</label>
+                  <input type="password" id="telegramBotToken" placeholder="123456789:AAH..." />
+                  <label for="telegramChatId" style="margin-top: 8px;">Telegram Chat ID / Channel ID</label>
+                  <input type="text" id="telegramChatId" placeholder="VD: -1001234567890 hoặc @ten_channel" />
+                  <div style="margin-top: 8px;">
+                    <button type="button" class="btn btn-sm btn-secondary" id="btnTestTelegram">Gửi tin nhắn thử Telegram</button>
+                  </div>
+                </div>
+                <div class="field" id="fbFields">
+                  <label for="fbPageId">Facebook Page ID</label>
+                  <input type="text" id="fbPageId" placeholder="VD: 102938475610293" />
+                  <label for="fbAccessToken" style="margin-top: 8px;">Page Access Token</label>
+                  <input type="password" id="fbAccessToken" placeholder="EAAG..." />
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Lưu cấu hình hệ thống</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
